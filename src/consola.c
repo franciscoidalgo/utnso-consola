@@ -32,7 +32,7 @@ static identificador_t parsear_identificador(char *nombre) {
        i++)
     ;
   if (i == CANT_INSTRUCCIONES) {
-    printf("Instruccion invalida: %s", nombre);
+    printf("Instruccion invalida: %s\n", nombre);
     exit(EXIT_FAILURE);
   } else {
     return identificadores[i];
@@ -60,7 +60,8 @@ static instruccion_t *parsear_instruccion(char *instruccion) {
   for (int i = 0; i < identificador.cantidad_parametros; i++) {
     token = strtok(NULL, " ");
     if (token == NULL) {
-      break;
+      fprintf(stderr, "La operacion %s requiere %d parametros.", identificador.nombre, identificador.cantidad_parametros);
+      exit(EXIT_FAILURE);
     }
     parametros[i] = atoi(token);
   }
